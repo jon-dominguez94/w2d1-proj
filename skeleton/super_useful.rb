@@ -37,6 +37,7 @@ class BestFriend
     @yrs_known = yrs_known 
     raise "Not enough years" if yrs_known < 5
     @fav_pastime = fav_pastime
+    raise "Empty name / fav_pastime" if @name.empty? || @fav_pastime.empty?
   end
 
   def talk_about_friendship
