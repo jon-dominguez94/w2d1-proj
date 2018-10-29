@@ -7,7 +7,20 @@ class Board
     populate
   end
   
+  def move_piece(start_pos, end_pos)
+    raise ArgumentError, "No piece at this pos!" if self[start_pos].nil?
+    raise ArgumentError, "Space is taken!" unless self[end_pos].nil?
+    start_piece = self[start_pos] 
+    self[end_pos] = start_piece
+    self[start_pos] = nil
+  end
   
+  def valid_pos?(pos)
+    row,col = pos
+    row.between?(0, 7) && col.between?(0, 7)
+  end
+  
+  # private
   attr_reader :grid
   
   def [](pos)
@@ -25,7 +38,7 @@ class Board
       if [0, 1, 6, 7].include?(i)
         row.each_index do |j|
           pos = [i,j]
-          self[pos] = Piece.new
+          self[pos] = Piece.new("AAA")
         end
       end
     end
